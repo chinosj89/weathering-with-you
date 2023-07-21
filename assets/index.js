@@ -3,7 +3,7 @@ let weather = {
   fetchWeather: function (city) {
     fetch("https://api.openweathermap.org/data/2.5/forecast/?q="
       + city
-      + "&cnt=5&appid="
+      + "&cnt=40&appid="
       + this.apiKey
       + "&units=imperial")
       //response learned from youtube https://www.youtube.com/watch?v=WZNG8UomjSI
@@ -16,7 +16,7 @@ let weather = {
   showWeather: function (data) {
     document.querySelector(".city").innerText = "Weather in: " + data.city.name;
 
-    for (i = 0; i < data.list.length; i+=8) {
+    for (let i = 0; i < 40; i+=8) {
       const weatherInfo = {
         dt: data.list[i].dt,
         temp: data.list[i].main.temp,
@@ -27,7 +27,7 @@ let weather = {
       };
 
 
-      var dayDiv = document.getElementById("day" + (i + 1));
+      var dayDiv = document.getElementById("day" + (i /8 + 1));
       dayDiv.querySelector(".time").innerText = dayjs.unix(weatherInfo.dt).format('MMM DD YYYY');
       dayDiv.querySelector(".description").innerText = weatherInfo.description;
       dayDiv.querySelector(".icon").src =
