@@ -15,8 +15,21 @@ let weather = {
 
   showWeather: function (data) {
     document.querySelector(".city").innerText = "Weather in: " + data.city.name;
+    var historyPageEl = document.querySelector(".searchHistory")
+    var historyPage = localStorage.getItem('searchHistory');
+    if (!historyPage) {
+      historyPage = [];
+    } else {
+      historyPage = JSON.parse(historyPage)
+    }
+    historyPage.push(data.city.name);
+    localStorage.setItem('searchHistory', JSON.stringify(historyPage));
+    var ulDiv = document.createElement("ul")
+    ulDiv.textContent = data.city.name
+    historyPageEl.appendChild(ulDiv);
 
-    for (let i = 0; i < 40; i+=8) {
+
+    for (let i = 0; i < 40; i += 8) {
       const weatherInfo = {
         dt: data.list[i].dt,
         temp: data.list[i].main.temp,
@@ -26,8 +39,9 @@ let weather = {
         speed: data.list[i].wind.speed,
       };
 
-
-      var dayDiv = document.getElementById("day" + (i /8 + 1));
+      //This line worked! 
+      //https://stackoverflow.com/questions/59935038/openweathermap-api-forecast-for-only-days 
+      var dayDiv = document.getElementById("day" + (i / 8 + 1));
       dayDiv.querySelector(".time").innerText = dayjs.unix(weatherInfo.dt).format('MMM DD YYYY');
       dayDiv.querySelector(".description").innerText = weatherInfo.description;
       dayDiv.querySelector(".icon").src =
@@ -37,19 +51,26 @@ let weather = {
       dayDiv.querySelector(".wind").innerText = "Wind speed: " + weatherInfo.speed + " mph";
       console.log(weatherInfo)
       console.log("Current dayDiv ID:", dayDiv.id);
-
     }
-  },
-
+  }
 };
+
+
+// append name - still an issue of not being able to append data.city.name without having to add this function above. but it loops in with the for loo
 
 function searchWeather(event) {
   event.preventDefault();
   weather.fetchWeather(document.querySelector(".searchBar").value);
+
+  //Removes d-none for history page as well
+  var historyPage = document.querySelector(".searchHistory")
+  historyPage.classList.remove('d-none')
+
+  // Removes d-none when function runs
   var weatherPages = document.querySelectorAll(".weatherPage")
   weatherPages.forEach(function (weatherPage) {
     weatherPage.classList.remove('d-none');
-});
+  });
 }
 document.querySelector(".searchBtn").addEventListener("submit", searchWeather);
 
@@ -60,5 +81,4 @@ document.querySelector(".searchBtn").addEventListener("submit", searchWeather);
 });*/
 
 // TODO:
-  //remember to add localStorage to save history. Append child to make a list
-  //remmeber that this is a 5 day forecast. You might have to create/append divs to create different days 
+//remember to add localStorage to save history. Append child to make a list
