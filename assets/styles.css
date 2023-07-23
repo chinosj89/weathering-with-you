@@ -8,6 +8,7 @@ body {
   /*background-image: url('https://source.unsplash.com/1600x900/?landscape');*/
   height: 100vh;
   margin: 0 auto;
+  display:flex;
 }
 
 .weather {
@@ -22,8 +23,8 @@ body {
 
 .weatherContainer {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .weatherPage {
@@ -32,7 +33,7 @@ body {
   padding: 1.5em;
   border-radius: 20px;
   width: 100%;
-  max-width: 475px;
+  max-width: 250px;
   margin: 1em;
 }
 
@@ -42,7 +43,7 @@ body {
   padding: 1.5em;
   border-radius: 20px;
   width: 100%;
-  max-width: 640px;
+  max-width: 200px;
   margin: 1em;
 }
 

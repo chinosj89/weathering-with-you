@@ -22,12 +22,21 @@ let weather = {
     } else {
       historyPage = JSON.parse(historyPage)
     }
+    if (!historyPage.includes(data.city.name)) {
     historyPage.push(data.city.name);
     localStorage.setItem('searchHistory', JSON.stringify(historyPage));
-    var ulDiv = document.createElement("ul")
-    ulDiv.textContent = data.city.name
-    historyPageEl.appendChild(ulDiv);
 
+    var ulDiv = document.createElement("button")
+    ulDiv.textContent = data.city.name
+    ulDiv.classList.add("btn");
+    ulDiv.addEventListener("click", function () {
+      weather.fetchWeather(data.city.name);
+    })
+    historyPageEl.appendChild(ulDiv);
+  } 
+
+//WHEN I click on a city in the search history
+//THEN I am again presented with current and future conditions for that city. You have to append a button that runs the function showWeather again for the data.city.name saved
 
     for (let i = 0; i < 40; i += 8) {
       const weatherInfo = {
@@ -56,8 +65,6 @@ let weather = {
 };
 
 
-// append name - still an issue of not being able to append data.city.name without having to add this function above. but it loops in with the for loo
-
 function searchWeather(event) {
   event.preventDefault();
   weather.fetchWeather(document.querySelector(".searchBar").value);
@@ -74,11 +81,4 @@ function searchWeather(event) {
 }
 document.querySelector(".searchBtn").addEventListener("submit", searchWeather);
 
-/*document.querySelector(".searchBtn").addEventListener("keyup", function (event) {
-  if (event.key === "Enter") {
-    searchWeather(event);
-  }
-});*/
-
-// TODO:
-//remember to add localStorage to save history. Append child to make a list
+weather.fetchWeather("")
