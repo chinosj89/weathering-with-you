@@ -1,5 +1,5 @@
 # Simple Weather App 
-## Deployed Site: 
+## Deployed Site: https://chinosj89.github.io/weathering-with-you/
 ## User Story:
 `AS A traveler`<br />
 `I WANT to see the weather outlook for multiple cities`<br />
