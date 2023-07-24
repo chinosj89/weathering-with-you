@@ -24,11 +24,10 @@ let weather = {
     }
     if (!historyPage.includes(data.city.name)) {
     historyPage.push(data.city.name);
-    localStorage.setItem('searchHistory', JSON.stringify(historyPage));
-
+    localStorage.setItem('searchHistory', JSON.stringify(historyPage))
     var ulDiv = document.createElement("button")
     ulDiv.textContent = data.city.name
-    ulDiv.classList.add("btn");
+    ulDiv.classList.add("button");
     ulDiv.addEventListener("click", function () {
       weather.fetchWeather(data.city.name);
     })
@@ -58,6 +57,8 @@ let weather = {
       dayDiv.querySelector(".temp").innerText = weatherInfo.temp + "°F";
       dayDiv.querySelector(".humidity").innerText = weatherInfo.humidity + "%"
       dayDiv.querySelector(".wind").innerText = "Wind speed: " + weatherInfo.speed + " mph";
+      document.body.style.backgroundImage =
+      "url('https://source.unsplash.com/1600x900/?" + data.city.name + "')"
       console.log(weatherInfo)
       console.log("Current dayDiv ID:", dayDiv.id);
     }
@@ -80,5 +81,3 @@ function searchWeather(event) {
   });
 }
 document.querySelector(".searchBtn").addEventListener("submit", searchWeather);
-
-weather.fetchWeather("")
