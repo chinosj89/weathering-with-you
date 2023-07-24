@@ -14,9 +14,12 @@ let weather = {
   //Youtube dev created a const per category. I will be placing them under 1 data since I want to take the name of the city and place it in a history 
 
   showWeather: function (data) {
+    // city name is outside of the for loop since i only want it to appear in one div
     document.querySelector(".city").innerText = "Weather in: " + data.city.name;
     var historyPageEl = document.querySelector(".searchHistory")
     var historyPage = localStorage.getItem('searchHistory');
+    // if statement creates the button for the previously searched city but also being able to use that betton to run the showWeather function again.
+    // if statement also prevents duplicates within the local storage
     if (!historyPage) {
       historyPage = [];
     } else {
@@ -34,9 +37,8 @@ let weather = {
     historyPageEl.appendChild(ulDiv);
   } 
 
-//WHEN I click on a city in the search history
-//THEN I am again presented with current and future conditions for that city. You have to append a button that runs the function showWeather again for the data.city.name saved
-
+  // for loop appends the data inside the div
+// for loop logic: since the the api being used is the 5day/3hr forecast, the logic had to be created this way; i = 0, starts the first element; i < 40 since the count for the parameter is 40 since it is 8 sets of 3 hour intervals so 5 days = 8 sets; i += 8 is an increment to jump by 8 called since that would start a new date. 
     for (let i = 0; i < 40; i += 8) {
       const weatherInfo = {
         dt: data.list[i].dt,
@@ -65,7 +67,7 @@ let weather = {
   }
 };
 
-
+// function for the submit button and input area
 function searchWeather(event) {
   event.preventDefault();
   weather.fetchWeather(document.querySelector(".searchBar").value);
