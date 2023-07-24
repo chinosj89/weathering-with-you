@@ -6,9 +6,10 @@
 body {
   background: #222;
   background-image: url('https://source.unsplash.com/1600x900/?landscape');
+  background-size: cover;
   height: 100vh;
+  width: 100vw;
   margin: 0 auto;
-  display:flex;
 }
 
 .weather {
@@ -18,23 +19,6 @@ body {
   border-radius: 20px;
   max-width: 475px;
   max-height: 250px;
-  margin: 1em;
-
-}
-
-.weatherContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.weatherPage {
-  background: #000000d0;
-  color: white;
-  padding: 1.5em;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 250px;
   margin: 1em;
 }
 
@@ -47,6 +31,22 @@ body {
   max-width: 200px;
   margin: 1em;
 }
+
+.weatherPage {
+  background: #000000d0;
+  color: white;
+  padding: 1.5em;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 250px;
+  margin: 1em;
+}
+.weatherContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 
 button {
   margin: 10px;
